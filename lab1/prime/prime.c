@@ -7,6 +7,7 @@ int isprime(long n);
 int main(int argc, char ** argv){
 
     int n=10000000,i,size,rank, count=0;
+
     double time;	
 
     MPI_Init( &argc, &argv );
@@ -16,12 +17,17 @@ int main(int argc, char ** argv){
     time=MPI_Wtime();
 
 
-    int start = (rank % 2 == 0) ? rank + 1 : rank + 2;
+    int total = 0;
 
-    for(i=start; i<n; i=i+size)
+	for(i = 3 + (rank *2); i<n; i=i+size*2){
         if (isprime(i)) count++;
-    time=MPI_Wtime()-time;
+    }
+        
 
+    time=MPI_Wtime()-time;
+	
+	
+	
     printf("Processor %d finds %d primes in %lf\n",rank,count,time);    
     
    
