@@ -17,7 +17,6 @@ int main(int argc, char ** argv){
     time=MPI_Wtime();
 
 
-    int total = 0;
 
 	for(i = 3 + (rank *2); i<n; i=i+size*2){
         if (isprime(i)) count++;
